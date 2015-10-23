@@ -9,7 +9,7 @@ import java.util.List;
 public class Trip {
 	Vehicle vehicle;
 	Route route;
-	List<Employee> passengerList;
+	List<Customer> passengerList;
 	
 	public Vehicle getVehicle() {
 		return vehicle;
@@ -23,10 +23,10 @@ public class Trip {
 	public void setRoute(Route route) {
 		this.route = route;
 	}
-	public List<Employee> getPassengerList() {
+	public List<Customer> getPassengerList() {
 		return passengerList;
 	}
-	public void setPassengerList(List<Employee> passengerList) {
+	public void setPassengerList(List<Customer> passengerList) {
 		this.passengerList = passengerList;
 	}
 	

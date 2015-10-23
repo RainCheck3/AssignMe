@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Coordinator {
 
-	List<Employee> passengerList;
+	List<Customer> passengerList;
 	List<Vehicle> availableVehicleList;
 	List<Vehicle> occupiedVehicleList;
 	List<Route> routeList;

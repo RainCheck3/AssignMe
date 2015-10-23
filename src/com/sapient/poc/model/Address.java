@@ -1,4 +1,4 @@
-package com.sapient.model;
+package com.sapient.poc.model;
 
 /**
  * @author jxu1

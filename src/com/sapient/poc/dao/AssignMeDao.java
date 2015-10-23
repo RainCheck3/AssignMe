@@ -1,13 +1,13 @@
 /**
  * 
  */
-package com.sapient.dao;
+package com.sapient.poc.dao;
 
 import java.util.List;
 
-import com.sapient.model.Employee;
-import com.sapient.model.Route;
-import com.sapient.model.Vehicle;
+import com.sapient.poc.model.Employee;
+import com.sapient.poc.model.Route;
+import com.sapient.poc.model.Vehicle;
 
 /**
  * @author jxu1

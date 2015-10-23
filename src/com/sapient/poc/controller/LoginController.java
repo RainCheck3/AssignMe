@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.sapient.controller;
+package com.sapient.poc.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.sapient.controller;
+package com.sapient.poc.controller;
 
 import org.springframework.stereotype.Controller;
 

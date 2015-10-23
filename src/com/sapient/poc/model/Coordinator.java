@@ -1,4 +1,4 @@
-package com.sapient.client.cui;
+package com.sapient.poc.model;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Coordinator {
 
-	List<Passenger> passengerList;
+	List<Employee> passengerList;
 	List<Vehicle> availableVehicleList;
 	List<Vehicle> occupiedVehicleList;
 	List<Route> routeList;

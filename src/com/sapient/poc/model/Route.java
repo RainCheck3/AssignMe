@@ -1,4 +1,4 @@
-package com.sapient.model;
+package com.sapient.poc.model;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -8,6 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 
 /**
@@ -17,7 +21,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="VEHICLE")
-public class Vehicle implements Serializable {
+@NamedQueries(value = {@NamedQuery(name = "Vehicle.findAll", query = "from Vehicle v")})
+	public class Vehicle implements Serializable {
 	/**
 	 * 
 	 */
@@ -31,8 +36,11 @@ public class Vehicle implements Serializable {
 	private int capacity;
 	
 	@OneToOne
-	@JoinColumn(name="ROUTE_ID")
+	@JoinColumn(name="ROUTE_ID", referencedColumnName="ROUTE_ID")
 	private Route route;
+	
+	@Transient
+	private int currentPassengerCount;
 	
 	public int getVehicleId() {
 		return vehicleId;
@@ -51,6 +59,19 @@ public class Vehicle implements Serializable {
 	}
 	public void setRoute(Route route) {
 		this.route = route;
+	}
+	public int getCurrentPassengerCount() {
+		return currentPassengerCount;
+	}
+	public void setCurrentPassengerCount(int currentPassengerCount) {
+		this.currentPassengerCount = currentPassengerCount;
+	}
+	
+	public boolean isFull() {
+		if (currentPassengerCount < capacity) {
+			return false;
+		}
+		return true;
 	}
 	
 }

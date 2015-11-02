@@ -3,6 +3,8 @@
  */
 package com.sapient.poc.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,8 +26,7 @@ public class AccountController {
 	AccountService accountService;
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(@ModelAttribute("userLogin") Customer user,  ModelMap modelMap) {
-        Customer userLogin = (Customer) user;
+	public String login(@ModelAttribute("userLogin") Customer user,  ModelMap modelMap, HttpSession session) {
         String username = user.getCustomerId();
         String password = user.getPassword();
         Customer userData;
@@ -33,6 +34,7 @@ public class AccountController {
         userData = accountService.validateLogin(username, password);
         
 		if (userData != null) {
+			session.setAttribute("user", userData);
 			modelMap.addAttribute("user", userData);
 			return "welcome";
 		} else {

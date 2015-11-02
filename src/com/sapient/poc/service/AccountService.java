@@ -10,6 +10,6 @@ import com.sapient.poc.model.Customer;
  *
  */
 public interface AccountService {
-	public boolean registerCustomer(Customer customer);
-	public Customer validateLogin(String username, String password);
+	boolean registerCustomer(Customer customer);
+	Customer validateLogin(String username, String password);
 }

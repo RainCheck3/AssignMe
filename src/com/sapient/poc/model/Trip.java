@@ -7,9 +7,10 @@ import java.util.List;
  * Represents a trip made by a taxi at a particular hour with list of passengers
  */
 public class Trip {
-	Vehicle vehicle;
-	Route route;
-	List<Customer> passengerList;
+	private Vehicle vehicle;
+	private List<Customer> passengerList;
+	private int departureTime;
+	private int returnTime;
 	
 	public Vehicle getVehicle() {
 		return vehicle;
@@ -17,18 +18,22 @@ public class Trip {
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
 	}
-	public Route getRoute() {
-		return route;
-	}
-	public void setRoute(Route route) {
-		this.route = route;
-	}
 	public List<Customer> getPassengerList() {
 		return passengerList;
 	}
 	public void setPassengerList(List<Customer> passengerList) {
 		this.passengerList = passengerList;
 	}
-	
-	
+	public int getDepartureTime() {
+		return departureTime;
+	}
+	public void setDepartureTime(int departureTime) {
+		this.departureTime = departureTime;
+	}
+	public int getReturnTime() {
+		return returnTime;
+	}
+	public void setReturnTime(int returnTime) {
+		this.returnTime = returnTime;
+	}
 }

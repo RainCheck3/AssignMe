@@ -78,5 +78,7 @@ public class Customer implements Serializable{
 		this.address = address;
 	}
 	
-	
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}	
 }

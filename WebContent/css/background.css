@@ -1,0 +1,44 @@
+@CHARSET "ISO-8859-1";
+
+.capitalize {
+	text-transform: capitalize;
+}
+
+.black {
+ color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+ }
+
+html { 
+  background: url("/AssignMe/img/chicago.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  opacity:0.9;
+}
+
+.transbox {
+    margin: 5px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    opacity: 0.9;
+}
+
+.align {
+    width: 100px;
+    height: 100px;
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+
+.inner {
+    width: 50%;
+    margin: 0 auto;
+}

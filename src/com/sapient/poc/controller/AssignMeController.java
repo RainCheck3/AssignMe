@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.sapient.poc.model.Address;
 import com.sapient.poc.model.Customer;
 import com.sapient.poc.model.Trip;
 import com.sapient.poc.service.AssignMeService;
-
 
 /**
  * @author jxu1
@@ -24,25 +24,28 @@ import com.sapient.poc.service.AssignMeService;
 @Controller
 @SessionAttributes("user")
 public class AssignMeController {
-	
+
 	@Autowired
 	AssignMeService assignMeService;
 
 	@RequestMapping(value = "/assign", method = RequestMethod.GET)
-	public String login(@RequestParam("address") String addressCode, @RequestParam("departureHour") int hourOfDeparture, ModelMap modelMap, HttpSession session) {
-		
+	public String login(@RequestParam("departureHour") int hourOfDeparture, ModelMap modelMap,
+			HttpSession session) {
+
 		Customer passenger = (Customer) session.getAttribute("user");
+		Address address = passenger.getAddress();
 		
-		Trip trip = assignMeService.assignCab(addressCode, hourOfDeparture, passenger);
-		
-		
-		
-		modelMap.addAttribute("trip", trip);
-		modelMap.addAttribute("address", addressCode);
-		modelMap.addAttribute("hour", hourOfDeparture);
-		
-		
-		
-		return "cabAssigned";
+		Trip trip = assignMeService.assignCab(address.getAddressId(), hourOfDeparture, passenger);
+
+		if (trip != null) {
+
+			modelMap.addAttribute("trip", trip);
+			modelMap.addAttribute("address", address);
+			modelMap.addAttribute("hour", hourOfDeparture);
+
+			return "cabAssigned";
+		} else {
+			return "noCabAvailable";
+		}
 	}
 }

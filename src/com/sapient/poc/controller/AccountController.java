@@ -3,6 +3,7 @@
  */
 package com.sapient.poc.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,10 @@ public class AccountController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(@ModelAttribute("userLogin") Customer user,  ModelMap modelMap, HttpSession session) {
+		
         String username = user.getCustomerId();
         String password = user.getPassword();
         Customer userData;
-        
         userData = accountService.validateLogin(username, password);
         
 		if (userData != null) {
@@ -51,5 +52,17 @@ public class AccountController {
 		} else {
 			return new ModelAndView("register", "userRegister", new Customer());
 		}
+	}
+	
+	@RequestMapping(value="logout", method=RequestMethod.GET)
+	public String logout(HttpServletRequest request) {
+				
+		HttpSession session = request.getSession(false);
+		
+		if (session != null) {
+			session.removeAttribute("user");
+			session.invalidate();
+		}
+		return "redirect:/home";
 	}
 }

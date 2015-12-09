@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.sapient.poc.dao.AssignMeDao;
 import com.sapient.poc.model.Customer;
-import com.sapient.poc.model.Route;
 import com.sapient.poc.model.Trip;
 import com.sapient.poc.model.Vehicle;
 import com.sapient.poc.service.AssignMeService;
@@ -26,15 +25,15 @@ public class AssignMeServiceImpl implements AssignMeService {
 	@Autowired
 	AssignMeDao assignMeDao;
 
-	static private List<Trip> tripList = null;
-	static private List<Vehicle> fullyAssignedVehicleList = null;
-	static private List<Vehicle> availableVehicleList = null;
+	static private List<Trip> tripList;
+	static private List<Vehicle> fullyAssignedVehicleList;
+	static private List<Vehicle> availableVehicleList;
 
 	/*
 	 * @see com.sapient.poc.service.AssignMeService#assignCab(java.lang.String)
 	 */
 	@Override
-	public Trip assignCab(String addressCode, int hourOfDeparture, Customer passenger) {
+	public Trip assignCab(int addressId, int hourOfDeparture, Customer passenger) {
 
 		Trip trip;
 		List<Customer> passengerList;
@@ -43,7 +42,7 @@ public class AssignMeServiceImpl implements AssignMeService {
 		checkForReturnedVehicles();
 		
 		/* Search existing trips for available cabs first */
-		trip = searchExistingTrips(addressCode, hourOfDeparture, passenger);
+		trip = searchExistingTrips(addressId, hourOfDeparture, passenger);
 		if (trip != null) {
 			tripList.add(trip);
 			return trip;
@@ -58,13 +57,17 @@ public class AssignMeServiceImpl implements AssignMeService {
 		Vehicle newVehicle = null;
 
 		for (Vehicle currentVehicle : availableVehicleList) {
-			if (currentVehicle.getRoute().getAddress1().equalsIgnoreCase(addressCode)) {
+			if (currentVehicle.getRoute().getAddressId1() == addressId) {
 				int currentPassengerCount = currentVehicle.getCurrentPassengerCount();
 				currentVehicle.setCurrentPassengerCount(currentPassengerCount + 1);
 				// check if full after this
 				newVehicle = currentVehicle;
+				checkIfVehicleFull(newVehicle);
 				break;
-			}
+			} /*else {
+				//No available vehicles to service route at the moment
+				return null;
+			}*/
 		}
 		trip.setVehicle(newVehicle);
 
@@ -73,8 +76,8 @@ public class AssignMeServiceImpl implements AssignMeService {
 	}
 
 	/* Search existing trips for available cabs */
-	private Trip searchExistingTrips(String addressCode, int hourOfDeparture, Customer passenger) {
-		
+	private Trip searchExistingTrips(int addressId, int hourOfDeparture, Customer passenger) {
+
 		List<Customer> passengerList;
 
 		/* No trips yet */
@@ -90,24 +93,34 @@ public class AssignMeServiceImpl implements AssignMeService {
 		/* Search trips for matching address code & departure time */
 		for (Trip currentTrip : tripList) {
 			/* Match found */
-			if (currentTrip.getVehicle().getRoute().getAddress1().equalsIgnoreCase(addressCode) && currentTrip.getDepartureTime() == hourOfDeparture) {
-				int currentPassengerCount = currentTrip.getVehicle().getCurrentPassengerCount();
-				currentTrip.getVehicle().setCurrentPassengerCount(currentPassengerCount+1);
-				
-				passengerList = currentTrip.getPassengerList();
-				passengerList.add(passenger);
-				checkIfVehicleFull(currentTrip.getVehicle());
-				
+			if (currentTrip.getVehicle().getRoute().getAddressId1() == addressId && currentTrip.getDepartureTime() == hourOfDeparture
+					&& availableVehicleList.contains(currentTrip.getVehicle())) {
+				/* Don't add same passenger twice to same trip */
+				boolean inTrip = false;
+				for (Customer current : currentTrip.getPassengerList()) {
+					if (current.getCustomerId().equalsIgnoreCase(passenger.getCustomerId())) {
+						inTrip = true;
+						break;
+					}
+				}
+				if (inTrip == false) {
+					int currentPassengerCount = currentTrip.getVehicle().getCurrentPassengerCount();
+					currentTrip.getVehicle().setCurrentPassengerCount(currentPassengerCount + 1);
+					passengerList = currentTrip.getPassengerList();
+					passengerList.add(passenger);
+					checkIfVehicleFull(currentTrip.getVehicle());
+				}
 				return currentTrip;
 			}
 		}
 		/* No matching trip found */
 		return null;
 	}
-	
+
 	/**
-	 * If vehicle is full, add to fullyAssignedVehicleList
-	 * and remove from availableVehicleList
+	 * If vehicle is full, add to fullyAssignedVehicleList and remove from
+	 * availableVehicleList
+	 * 
 	 * @param vehicle
 	 */
 	private void checkIfVehicleFull(Vehicle vehicle) {
@@ -116,12 +129,12 @@ public class AssignMeServiceImpl implements AssignMeService {
 			availableVehicleList.remove(vehicle);
 		}
 	}
-	
+
 	/**
 	 * If vehicle has returned from journey, remove from
 	 * fullyAssignedVehicleList and add to availableVehicleList
 	 */
-	private void checkForReturnedVehicles(){
-		
+	private void checkForReturnedVehicles() {
+
 	}
 }

@@ -11,5 +11,5 @@ import com.sapient.poc.model.Trip;
  *
  */
 public interface AssignMeService {
-	Trip assignCab(String addressCode, int hourOfDeparture, Customer passenger);
+	Trip assignCab(int addressId, int hourOfDeparture, Customer passenger);
 }

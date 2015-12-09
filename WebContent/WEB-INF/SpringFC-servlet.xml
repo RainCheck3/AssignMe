@@ -9,7 +9,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<context:annotation-config />
-	<!-- <context:property-placeholder location="classpath:jdbc.properties"/> -->
+	<!-- <context:property-placeholder location="classpath:log4j.properties"/> -->
 	<context:component-scan base-package="com.sapient.poc" />
 	<mvc:annotation-driven />
 	<mvc:resources location="/img/" mapping="/img/**" />
@@ -50,8 +50,8 @@
 	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<!-- <bean id="transactionManager"
+	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
-	</bean> -->
+	</bean>
 </beans>

@@ -469,17 +469,7 @@ h2, .headline-secondary, .headline-secondary--grouped {
 .btn--info {
   background-color: #9279c3; }
 
-[class^="btn--"] {
-  margin-bottom: 1.42857em; }
-  @media (min-width: 1px) and (max-width: 768px) {
-    [class^="btn--"] {
-      width: 100%; } }
-  @media (min-width: 769px) {
-    [class^="btn--"] {
-      width: auto;
-      display: inline-block; }
-      [class^="btn--"] + [class^="btn--"] {
-        margin-left: 20px; } }
+
 
 .navbar {
   position: relative; }

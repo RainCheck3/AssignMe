@@ -22,7 +22,6 @@ public class AccountDao {
 	private HibernateTemplate hibernateTemplate;
 		
 	public boolean registerNewCustomer(Customer newCustomer) {
-		
 		hibernateTemplate.saveOrUpdate(newCustomer);
 		return true;
 	}

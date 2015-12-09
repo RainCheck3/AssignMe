@@ -31,4 +31,15 @@ public class NavigationController {
 	public String templatePage() {
 		return "template";
 	}
+	
+	@RequestMapping(value="welcome", method = RequestMethod.GET)
+	public String welcomePage() {
+		return "welcome";
+		
+	}
+	
+	@RequestMapping(value="enterTime", method = RequestMethod.GET)
+	public String enterAddressPage() {
+		return "enterTime";
+	}
 }

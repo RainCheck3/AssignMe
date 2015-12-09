@@ -27,16 +27,16 @@ public class Route implements Serializable {
 	private int routeId;
 	
 	@Column(name="ADDRESS1")
-	private String address1;
+	private int addressId1;
 	
 	@Column(name="ADDRESS2")
-	private String address2;
+	private int addressId2;
 	
 	@Column(name="ADDRESS3")
-	private String address3;
+	private int addressId3;
 	
 	@Column(name="ADDRESS4")
-	private String address4;
+	private int addressId4;
 	
 	@Column(name="TURNAROUND_TIME")
 	private int turnaroundTime;
@@ -49,36 +49,38 @@ public class Route implements Serializable {
 		this.routeId = routeId;
 	}
 
-	public String getAddress1() {
-		return address1;
+	
+
+	public int getAddressId1() {
+		return addressId1;
 	}
 
-	public void setAddress1(String address1) {
-		this.address1 = address1;
+	public void setAddressId1(int addressId1) {
+		this.addressId1 = addressId1;
 	}
 
-	public String getAddress2() {
-		return address2;
+	public int getAddressId2() {
+		return addressId2;
 	}
 
-	public void setAddress2(String address2) {
-		this.address2 = address2;
+	public void setAddressId2(int addressId2) {
+		this.addressId2 = addressId2;
 	}
 
-	public String getAddress3() {
-		return address3;
+	public int getAddressId3() {
+		return addressId3;
 	}
 
-	public void setAddress3(String address3) {
-		this.address3 = address3;
+	public void setAddressId3(int addressId3) {
+		this.addressId3 = addressId3;
 	}
 
-	public String getAddress4() {
-		return address4;
+	public int getAddressId4() {
+		return addressId4;
 	}
 
-	public void setAddress4(String address4) {
-		this.address4 = address4;
+	public void setAddressId4(int addressId4) {
+		this.addressId4 = addressId4;
 	}
 
 	public int getTurnaroundTime() {
